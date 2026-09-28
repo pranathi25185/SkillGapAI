@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | SkillGap AI{% endblock %}
+{% block page_heading %}Dashboard{% endblock %}
+{% block content %}
+<div class="hero modern-hero">
+<div><p class="eyebrow">YOUR CAREER SNAPSHOT</p><h2>Turn your resume into a career plan.</h2><p>Analyze skills, discover suitable roles, track growth and prepare for interviews.</p><a class="btn primary" href="{{ url_for('analyze') }}">Analyze My Resume →</a></div>
+<div class="hero-orbit"><span>AI</span></div>
+</div>
+
+<div class="stats-grid">
+<div class="stat-card accent"><span>Total Analyses</span><strong>{{ total_analyses }}</strong><small>Resume comparisons</small></div>
+<div class="stat-card"><span>Average Match</span><strong>{{ average_score }}%</strong><small>Across your analyses</small></div>
+<div class="stat-card"><span>Latest Level</span><strong>{% if latest %}{{ latest.level.label if latest.level else 'Ready' }}{% else %}Start{% endif %}</strong><small>Skill readiness</small></div>
+</div>
+
+<div class="dashboard-grid">
+<div class="panel chart-panel">
+<div class="panel-title"><div><p class="eyebrow">PROGRESS</p><h3>Match score trend</h3></div><a href="{{ url_for('progress') }}">View details →</a></div>
+<canvas id="trendChart" height="130"></canvas>
+</div>
+<div class="panel">
+<p class="eyebrow">QUICK ACTIONS</p><h3>Continue building</h3>
+<div class="quick-list">
+<a href="{{ url_for('resume_details') }}">▣ <span>View extracted resume details</span> →</a>
+<a href="{{ url_for('recommendations') }}">◎ <span>Explore career roles</span> →</a>
+<a href="{{ url_for('interview') }}">? <span>Practice interview questions</span> →</a>
+<a href="{{ url_for('progress') }}">↗ <span>Track skill progress</span> →</a>
+</div>
+</div>
+</div>
+
+<div class="section-head"><p class="eyebrow">CAREER INTELLIGENCE</p><h2>Everything you need in one place</h2></div>
+<div class="feature-grid">
+<a class="feature-card" href="{{ url_for('analyze') }}"><span class="feature-icon">⌁</span><h3>Resume Analyzer</h3><p>Compare your resume with a target role using skill, keyword and completeness signals.</p></a>
+<a class="feature-card" href="{{ url_for('skill_gap') }}"><span class="feature-icon">◈</span><h3>Skill Gap</h3><p>Understand your matching and missing skills.</p></a>
+<a class="feature-card" href="{{ url_for('recommendations') }}"><span class="feature-icon">◎</span><h3>Career Roles</h3><p>See roles aligned with your current skill set.</p></a>
+<a class="feature-card" href="{{ url_for('progress') }}"><span class="feature-icon">↗</span><h3>Skill Progress</h3><p>Track your analysis scores over time.</p></a>
+<a class="feature-card" href="{{ url_for('interview') }}"><span class="feature-icon">?</span><h3>Interview Prep</h3><p>Generate practice questions from your resume and target role.</p></a>
+<a class="feature-card" href="{{ url_for('history') }}"><span class="feature-icon">◷</span><h3>Analysis History</h3><p>Search and filter your previous analyses.</p></a>
+</div>
+
+{% if latest %}
+<div class="latest-card"><div><p class="eyebrow">LATEST ANALYSIS</p><h3>{{ latest.job_title }}</h3><p class="muted">{{ latest.resume_name }} • {{ latest.created_at }}</p></div><div class="score-badge">{{ latest.match_score }}%</div><a class="btn secondary" href="{{ url_for('result',analysis_id=latest.id) }}">View Result</a></div>
+{% endif %}
+
+<script>
+const trend={{ trend|tojson }};
+drawTrendChart("trendChart",trend);
+</script>
+{% endblock %}

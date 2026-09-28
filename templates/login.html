@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Login | SkillGap AI{% endblock %}
+{% block auth_content %}
+<div class="auth-card">
+<div class="auth-logo">S</div><p class="eyebrow">WELCOME BACK</p><h1>Login to SkillGap AI</h1>
+<p class="muted">Your personalized career intelligence workspace.</p>
+<form method="post" class="form">
+<label>Email<input type="email" name="email" required></label>
+<label>Password<input type="password" name="password" required></label>
+<button class="btn primary full">Login</button>
+</form>
+<div class="auth-links"><a href="{{ url_for('forgot_password') }}">Forgot password?</a></div>
+<p class="auth-switch">Don't have an account? <a href="{{ url_for('register') }}">Create one</a></p>
+</div>
+{% endblock %}

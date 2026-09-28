@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Resume Details | SkillGap AI{% endblock %}
+{% block page_heading %}Extracted Resume Details{% endblock %}
+{% block content %}
+<div class="intro"><p class="eyebrow">RESUME INTELLIGENCE</p><h2>What SkillGap AI extracted</h2><p class="muted">{{ analysis.resume_name }}</p></div>
+<div class="details-grid">
+{% for label,key in [('Name','name'),('Email','email'),('Phone','phone'),('LinkedIn','linkedin'),('GitHub','github'),('Experience','experience'),('Education','education'),('Projects','projects'),('Certifications','certifications')] %}
+<div class="detail-card"><span>{{ label }}</span><strong>{{ analysis.resume_details[key] }}</strong></div>
+{% endfor %}
+</div>
+<div class="panel"><h3>Resume summary</h3><p class="readable">{{ analysis.resume_details.summary }}</p></div>
+{% endblock %}

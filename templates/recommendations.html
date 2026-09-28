@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Career Roles | SkillGap AI{% endblock %}
+{% block page_heading %}Career Role Recommendations{% endblock %}
+{% block content %}
+<div class="intro"><p class="eyebrow">CAREER MATCHING</p><h2>Roles aligned with your skills</h2><p class="muted">These are skill-based recommendations, not guarantees of job eligibility.</p></div>
+<div class="role-grid">{% for role in analysis.recommendations %}<div class="role-card"><div class="role-top"><h3>{{ role.role }}</h3><strong>{{ role.score }}%</strong></div><div class="progress"><i style="width:{{ role.score }}%"></i></div>{% if role.missing %}<p class="muted">Build next: {{ role.missing|join(', ') }}</p>{% else %}<p class="success-text">Strong current skill coverage.</p>{% endif %}</div>{% endfor %}</div>
+{% endblock %}

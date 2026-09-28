@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Profile | SkillGap AI{% endblock %}
+{% block page_heading %}Profile{% endblock %}
+{% block content %}
+<div class="profile-layout">
+<div class="profile-card new-profile"><div class="profile-avatar">{{ user.name[0]|upper }}</div><h2>{{ user.name }}</h2><p>{{ user.email }}</p><span class="member">Member since {{ user.created_at[:10] }}</span><a class="btn danger-btn full" href="{{ url_for('logout') }}">↪ Logout</a></div>
+<div class="profile-panels">
+<div class="panel"><p class="eyebrow">PERSONAL DETAILS</p><h3>Update profile</h3><form method="post" class="form"><label>Full name<input name="name" value="{{ user.name }}" required></label><label>Email<input type="email" name="email" value="{{ user.email }}" required></label><button class="btn primary">Save Changes</button></form></div>
+<div class="panel"><p class="eyebrow">SECURITY</p><h3>Change password</h3><form method="post" action="{{ url_for('change_password') }}" class="form"><label>Current password<input type="password" name="current_password" required></label><label>New password<input type="password" name="new_password" minlength="6" required></label><label>Confirm new password<input type="password" name="confirm_password" minlength="6" required></label><button class="btn secondary">Change Password</button></form></div>
+<div class="panel"><p class="eyebrow">ACCOUNT TOOLS</p><div class="settings-row"><span>Dark mode</span><button class="btn secondary" onclick="toggleTheme()">Toggle Theme</button></div><a class="settings-row link-row" href="{{ url_for('notifications') }}"><span>Notifications</span><strong>{{ unread_notifications }} unread →</strong></a><a class="settings-row link-row" href="{{ url_for('history') }}"><span>Analysis history</span><strong>View →</strong></a></div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Skill Progress | SkillGap AI{% endblock %}
+{% block page_heading %}Skill Progress{% endblock %}
+{% block content %}
+<div class="intro"><p class="eyebrow">GROWTH TRACKING</p><h2>Your progress over time</h2><p class="muted">Every completed analysis contributes to this trend.</p></div>
+<div class="panel chart-panel"><canvas id="progressChart" height="120"></canvas></div>
+<div class="panel table-wrap"><table><thead><tr><th>Date</th><th>Role</th><th>Overall</th><th>Skill</th><th>Keywords</th></tr></thead><tbody>{% for x in data|reverse %}<tr><td>{{ x.date }}</td><td>{{ x.job }}</td><td>{{ x.score }}%</td><td>{{ x.skill }}%</td><td>{{ x.keyword }}%</td></tr>{% endfor %}</tbody></table></div>
+<script>drawProgressChart("progressChart",{{ data|tojson }});</script>
+{% endblock %}

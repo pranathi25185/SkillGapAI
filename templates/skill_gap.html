@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Skill Gap | SkillGap AI{% endblock %}
+{% block page_heading %}Skill Gap{% endblock %}
+{% block content %}
+<div class="intro"><p class="eyebrow">SKILL INTELLIGENCE</p><h2>{{ analysis.job_title }}</h2><p class="muted">Your current match level and the skills that need attention.</p></div>
+<div class="score-panel"><div class="ring"><span>{{ analysis.match_score }}%</span></div><div><h3>{{ analysis.level.label }} readiness</h3><p class="muted">{{ analysis.matching_skills|length }} matching skills • {{ analysis.missing_skills|length }} missing skills</p></div></div>
+<div class="result-grid"><div class="panel"><h3>Skills you have</h3><div class="chips">{% for x in analysis.matching_skills %}<span class="chip success">{{ x }}</span>{% else %}<span class="muted">No matches.</span>{% endfor %}</div></div><div class="panel"><h3>Skills to improve</h3><div class="chips">{% for x in analysis.missing_skills %}<span class="chip danger">{{ x }}</span>{% else %}<span class="muted">No gaps detected.</span>{% endfor %}</div></div></div>
+{% endblock %}

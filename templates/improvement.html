@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Resume Improvement | SkillGap AI{% endblock %}
+{% block page_heading %}Resume Improvement{% endblock %}
+{% block content %}
+<div class="intro"><p class="eyebrow">SMART SUGGESTIONS</p><h2>Make your resume stronger.</h2><p class="muted">Suggestions are based on the extracted resume structure and target role.</p></div>
+<div class="improvement-list">{% for x in analysis.improvements %}<div class="improvement-item"><span>✓</span><p>{{ x }}</p></div>{% endfor %}</div>
+<div class="panel"><h3>Detected skills</h3><div class="chips">{% for x in analysis.resume_skills %}<span class="chip">{{ x }}</span>{% else %}<span class="muted">No recognised skills.</span>{% endfor %}</div></div>
+{% endblock %}

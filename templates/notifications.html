@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Notifications | SkillGap AI{% endblock %}
+{% block page_heading %}Notifications{% endblock %}
+{% block content %}
+<div class="intro"><p class="eyebrow">UPDATES</p><h2>Your notifications</h2></div>
+<div class="notification-list">{% for n in notifications %}<div class="notification-item"><span class="notification-dot"></span><div><strong>{{ n.title }}</strong><p>{{ n.message }}</p><small>{{ n.created_at }}</small></div></div>{% else %}<div class="empty-state"><h3>No notifications.</h3><p>Completed analyses and account updates will appear here.</p></div>{% endfor %}</div>
+{% endblock %}

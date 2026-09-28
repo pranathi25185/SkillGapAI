@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Interview Prep | SkillGap AI{% endblock %}
+{% block page_heading %}Interview Prep{% endblock %}
+{% block content %}
+<div class="intro"><p class="eyebrow">PRACTICE</p><h2>AI-generated interview questions</h2><p class="muted">Questions generated from your target role, detected skills and skill gaps.</p></div>
+<div class="question-list">{% for q in analysis.interview_questions %}<div class="question"><span>{{ loop.index }}</span><p>{{ q }}</p></div>{% endfor %}</div>
+{% endblock %}

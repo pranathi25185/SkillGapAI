@@ -1,0 +1,4 @@
+{% extends "base.html" %}
+{% block title %}Page Not Found | SkillGap AI{% endblock %}
+{% block page_heading %}Page Not Found{% endblock %}
+{% block content %}<div class="empty-state"><div class="error-code">404</div><h2>We couldn't find that page.</h2><a class="btn primary" href="{{ url_for('home') }}">Back to Dashboard</a></div>{% endblock %}

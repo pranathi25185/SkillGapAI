@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}SkillGap AI{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script>document.documentElement.dataset.theme=localStorage.getItem("skillgap-theme")||"light";</script>
+</head>
+<body>
+{% if current_user %}
+<div class="app-shell">
+<aside class="sidebar" id="sidebar">
+    <a class="brand" href="{{ url_for('home') }}">
+        <span class="brand-mark">S</span><span><strong>SkillGap AI</strong><small>Career Intelligence</small></span>
+    </a>
+    <nav class="nav">
+        <a href="{{ url_for('home') }}" class="{% if request.endpoint=='home' %}active{% endif %}">⌂ <span>Dashboard</span></a>
+        <a href="{{ url_for('analyze') }}" class="{% if request.endpoint=='analyze' %}active{% endif %}">⌁ <span>Resume Analyzer</span></a>
+        <a href="{{ url_for('resume_details') }}">▣ <span>Resume Details</span></a>
+        <a href="{{ url_for('skill_gap') }}">◈ <span>Skill Gap</span></a>
+        <a href="{{ url_for('recommendations') }}">◎ <span>Career Roles</span></a>
+        <a href="{{ url_for('progress') }}">↗ <span>Skill Progress</span></a>
+        <a href="{{ url_for('keywords') }}"># <span>Job Keywords</span></a>
+        <a href="{{ url_for('roadmap') }}">→ <span>Learning Roadmap</span></a>
+        <a href="{{ url_for('improvement') }}">✦ <span>Resume Improvement</span></a>
+        <a href="{{ url_for('interview') }}">? <span>Interview Prep</span></a>
+        <a href="{{ url_for('history') }}">◷ <span>History</span></a>
+    </nav>
+    <div class="sidebar-bottom">
+        <a class="mini-profile" href="{{ url_for('profile') }}">
+            <span class="avatar">{{ current_user.name[0]|upper }}</span>
+            <span><strong>{{ current_user.name }}</strong><small>{{ current_user.email }}</small></span>
+        </a>
+        <a class="logout-link" href="{{ url_for('logout') }}">↪ Logout</a>
+    </div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+    <div class="top-title">
+        <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
+        <div><p class="eyebrow">AI CAREER INTELLIGENCE</p><h1>{% block page_heading %}Dashboard{% endblock %}</h1></div>
+    </div>
+    <div class="top-actions">
+        <button class="icon-btn" onclick="toggleTheme()" title="Dark mode">☾</button>
+        <a class="notification-btn" href="{{ url_for('notifications') }}">♢{% if unread_notifications %}<b>{{ unread_notifications }}</b>{% endif %}</a>
+        <a class="user-pill" href="{{ url_for('profile') }}"><span class="avatar small">{{ current_user.name[0]|upper }}</span><span>{{ current_user.name }}</span></a>
+    </div>
+</header>
+<section class="content">
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}<div class="flash-stack">{% for category,message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+{% endwith %}
+{% block content %}{% endblock %}
+</section>
+<footer class="footer">SkillGap AI • {{ current_year }}</footer>
+</main>
+</div>
+{% else %}
+<div class="auth-shell">
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}<div class="auth-flashes">{% for category,message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+{% endwith %}
+{% block auth_content %}{% endblock %}
+</div>
+{% endif %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

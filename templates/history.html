@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}History | SkillGap AI{% endblock %}
+{% block page_heading %}Analysis History{% endblock %}
+{% block content %}
+<div class="intro"><p class="eyebrow">YOUR RECORD</p><h2>Search your analyses</h2></div>
+<form class="history-filter" method="get"><input name="q" value="{{ q }}" placeholder="Search role or resume..."><select name="min_score"><option value="">Any score</option>{% for n in [40,50,60,70,80,90] %}<option value="{{ n }}" {% if min_score==n|string %}selected{% endif %}>{{ n }}%+</option>{% endfor %}</select><button class="btn primary">Filter</button><a class="btn secondary" href="{{ url_for('history') }}">Reset</a></form>
+<div class="panel table-wrap">{% if analyses %}<table><thead><tr><th>Resume</th><th>Target role</th><th>Match</th><th>Date</th><th></th></tr></thead><tbody>{% for x in analyses %}<tr><td>{{ x.resume_name }}</td><td>{{ x.job_title }}</td><td><span class="table-score">{{ x.match_score }}%</span></td><td>{{ x.created_at }}</td><td><a href="{{ url_for('result',analysis_id=x.id) }}">View →</a></td></tr>{% endfor %}</tbody></table>{% else %}<div class="empty-state"><h3>No analyses found.</h3><a class="btn primary" href="{{ url_for('analyze') }}">Analyze Resume</a></div>{% endif %}</div>
+{% endblock %}

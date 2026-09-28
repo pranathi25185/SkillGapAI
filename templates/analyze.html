@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Resume Analyzer | SkillGap AI{% endblock %}
+{% block page_heading %}Resume Analyzer{% endblock %}
+{% block content %}
+<div class="intro"><p class="eyebrow">INTELLIGENT ANALYSIS</p><h2>See how your resume fits a target role.</h2><p class="muted">The analyzer combines skill matching, job keyword coverage and resume completeness.</p></div>
+<form method="post" enctype="multipart/form-data" class="analyzer-grid">
+<div class="panel"><div class="panel-number">01</div><h3>Upload your resume</h3><p class="muted">PDF or DOCX • Maximum 8 MB</p>
+<label class="upload-box" for="resume"><span class="upload-icon">↑</span><strong id="file-name">Choose your resume</strong><small>Click to browse files</small><input id="resume" type="file" name="resume" accept=".pdf,.docx" required></label></div>
+<div class="panel"><div class="panel-number">02</div><h3>Target job</h3>
+<label>Job title<input name="job_title" placeholder="e.g. Software Engineer" required></label>
+<label>Job description<textarea name="job_description" rows="12" placeholder="Paste the complete job description..."></textarea></label>
+<button class="btn primary full">Analyze My Resume →</button></div>
+</form>
+<div class="notice"><strong>Smart analysis:</strong> Your score uses multiple signals instead of only counting matching skills.</div>
+{% endblock %}

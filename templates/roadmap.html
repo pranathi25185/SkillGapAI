@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Learning Roadmap | SkillGap AI{% endblock %}
+{% block page_heading %}Learning Roadmap{% endblock %}
+{% block content %}
+<div class="intro"><p class="eyebrow">NEXT STEPS</p><h2>Your personalized learning roadmap</h2><p class="muted">Focus on the gaps detected in your latest analysis.</p></div>
+<div class="roadmap">{% for item in analysis.roadmap %}<div class="roadmap-item"><div class="step">{{ loop.index }}</div><div><h3>{{ item.skill }}</h3><p>{{ item.description }}</p></div></div>{% else %}<div class="empty-state"><h3>No missing skills detected.</h3></div>{% endfor %}</div>
+{% endblock %}

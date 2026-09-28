@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Job Keywords | SkillGap AI{% endblock %}
+{% block page_heading %}Job Keywords{% endblock %}
+{% block content %}
+<div class="intro"><p class="eyebrow">TARGET ROLE</p><h2>Keywords for {{ analysis.job_title }}</h2><p class="muted">Skills and phrases detected in the job description.</p></div>
+<div class="panel"><div class="chips large">{% for x in analysis.keywords %}<span class="chip">{{ x }}</span>{% else %}<span class="muted">No recognised keywords detected.</span>{% endfor %}</div></div>
+{% endblock %}

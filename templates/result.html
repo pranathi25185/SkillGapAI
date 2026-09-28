@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Analysis Result | SkillGap AI{% endblock %}
+{% block page_heading %}Analysis Result{% endblock %}
+{% block content %}
+<div class="result-header"><div><p class="eyebrow">ANALYSIS COMPLETE</p><h2>{{ analysis.job_title }}</h2><p class="muted">{{ analysis.resume_name }} • {{ analysis.created_at }}</p></div><div class="score-column"><div class="big-score">{{ analysis.match_score }}<span>%</span></div><span class="level {{ analysis.level.class }}">{{ analysis.level.label }}</span></div></div>
+<div class="metric-grid">
+<div class="metric"><span>Skill Match</span><strong>{{ analysis.skill_score }}%</strong><div class="progress"><i style="width:{{ analysis.skill_score }}%"></i></div></div>
+<div class="metric"><span>Keyword Coverage</span><strong>{{ analysis.keyword_score }}%</strong><div class="progress"><i style="width:{{ analysis.keyword_score }}%"></i></div></div>
+<div class="metric"><span>Resume Completeness</span><strong>{{ analysis.completeness_score }}%</strong><div class="progress"><i style="width:{{ analysis.completeness_score }}%"></i></div></div>
+</div>
+<div class="result-grid">
+<div class="panel"><h3>Matching skills</h3><div class="chips">{% for x in analysis.matching_skills %}<span class="chip success">{{ x }}</span>{% else %}<span class="muted">None detected.</span>{% endfor %}</div></div>
+<div class="panel"><h3>Missing skills</h3><div class="chips">{% for x in analysis.missing_skills %}<span class="chip danger">{{ x }}</span>{% else %}<span class="muted">None detected.</span>{% endfor %}</div></div>
+</div>
+<div class="quick-links">
+<a href="{{ url_for('resume_details') }}" class="quick-card">▣ <span>Resume Details</span></a>
+<a href="{{ url_for('recommendations') }}" class="quick-card">◎ <span>Career Roles</span></a>
+<a href="{{ url_for('interview') }}" class="quick-card">? <span>Interview Prep</span></a>
+<a href="{{ url_for('download_report',analysis_id=analysis.id) }}" class="quick-card">↓ <span>Download PDF</span></a>
+</div>
+{% endblock %}
